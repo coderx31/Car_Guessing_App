@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Assignment 01</string>
+    <string name="car_guessing">Car Guessing</string>
+    <string name="identify_the_car_make">Identify the Car Make</string>
+    <string name="hints">Hints</string>
+    <string name="identify_the_car_image">Identify the Car Image</string>
+    <string name="advanced_level">Advanced Level</string>
+    <string name="developed_by_shenal">Developed by Shenal</string>
 </resources>
