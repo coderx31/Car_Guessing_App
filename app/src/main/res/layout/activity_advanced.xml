@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AdvancedActivity">
+
+    <ImageView
+        android:id="@+id/imgCar1"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/car1_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/guess_the_car"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/imgCar1"
+        app:layout_constraintStart_toStartOf="@+id/imgCar1"
+        app:layout_constraintTop_toBottomOf="@+id/imgCar1" />
+
+    <ImageView
+        android:id="@+id/imgCar2"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintEnd_toEndOf="@+id/car1_input"
+        app:layout_constraintStart_toStartOf="@+id/car1_input"
+        app:layout_constraintTop_toBottomOf="@+id/car1_input" />
+
+    <EditText
+        android:id="@+id/car2_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/guess_the_car"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/imgCar2"
+        app:layout_constraintStart_toStartOf="@+id/imgCar2"
+        app:layout_constraintTop_toBottomOf="@+id/imgCar2" />
+
+    <ImageView
+        android:id="@+id/imgCar3"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintEnd_toEndOf="@+id/car2_input"
+        app:layout_constraintStart_toStartOf="@+id/car2_input"
+        app:layout_constraintTop_toBottomOf="@+id/car2_input" />
+
+    <EditText
+        android:id="@+id/car3_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:textAlignment="center"
+        android:hint="@string/guess_the_car"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/imgCar3"
+        app:layout_constraintStart_toStartOf="@+id/imgCar3"
+        app:layout_constraintTop_toBottomOf="@+id/imgCar3" />
+
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="@string/submit"
+        android:textAllCaps="false"
+        android:background="@color/dark_mix_red"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/car3_input" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
