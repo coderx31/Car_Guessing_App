@@ -11,4 +11,23 @@
     <string name="next">Next</string>
     <string name="guess_the_car">Guess the Car</string>
 
+    <string-array name="cars_list">
+        <item>Audi</item>
+        <item>BMW</item>
+        <item>Chevrolet</item>
+        <item>Fiat</item>
+        <item>Ford</item>
+        <item>Jaguar</item>
+        <item>Lamborghini</item>
+        <item>McLaren</item>
+        <item>Mercedes</item>
+        <item>Mini Cooper</item>
+        <item>Mitsubishi</item>
+        <item>Nissan</item>
+        <item>Peugeot</item>
+        <item>Porche</item>
+        <item>Suzuki</item>
+        <item>Toyota</item>
+    </string-array>
+
 </resources>
