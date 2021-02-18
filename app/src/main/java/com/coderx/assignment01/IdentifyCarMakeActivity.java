@@ -2,20 +2,27 @@ package com.coderx.assignment01;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class IdentifyCarMakeActivity extends AppCompatActivity {
     private static final String TAG = "IdentifyCarMakeActivity";
     private Button btnIdentify;
     private ImageView imgCar;
+    private Spinner cars_spinner;
     private List<Image> cars;
     private List<Image> carsList = new ArrayList<>();
+    private String carMake;
 
 
     @Override
@@ -29,6 +36,9 @@ public class IdentifyCarMakeActivity extends AppCompatActivity {
 
         /*Initializing all the views in activity*/
         initViews();
+
+        /*calling randomImageGenerator Method for Testing purposes*/
+        randomImageGenerator();
     }
 
     private void initViews(){
@@ -36,6 +46,7 @@ public class IdentifyCarMakeActivity extends AppCompatActivity {
 
         btnIdentify = findViewById(R.id.btnIdentify);
         imgCar = findViewById(R.id.imgCar);
+        cars_spinner = findViewById(R.id.cars_spinner);
     }
 
     private List<Image> settingImages(List<Image> cars){
@@ -74,5 +85,53 @@ public class IdentifyCarMakeActivity extends AppCompatActivity {
 
 
         return cars;
+    }
+
+    private void randomImageGenerator(){
+        Log.d(TAG, "RandomImageGenerator: Image generator started");
+        Random random = new Random(); // import for generating random number
+        int randomNum = random.nextInt(30); // 30 is the bound for generating random number
+
+        // select car image from the arrayList using the generated random number
+        Image carImage = cars.get(randomNum);
+        // setting the image to image view
+        String resName = carImage.getImgName(); // get the image name and set it to resName for setting to imageView
+        imgCar.setImageDrawable(getResources().getDrawable(
+                getResourceId(resName, "mipmap", getApplicationContext())
+        ));
+
+        //Testing for Button Click
+        btnIdentify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(IdentifyCarMakeActivity.this, "Just Clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    /*method to get resource id from mipmap file - Here resource is car images*/
+    private static int getResourceId(String resName, String resType, Context context){
+        int resourceId = context.getResources()
+                .getIdentifier(resName, resType, context.getApplicationInfo().packageName);
+
+        // checks if the resource is available or not: if yes return the resource id
+        if (resourceId == 0){
+            throw new IllegalArgumentException("No string resources found with name "+resName);
+        }else{
+            return resourceId;
+        }
+    }
+
+    private void checkAnswer(String carMake){
+        Log.d(TAG, "checkAnswer: checking the answer");
+        String userAnswer = cars_spinner.getSelectedItem().toString();
+        if (carMake.equals(userAnswer)){
+            // create a snackbar to display to user  Correct Answer Message
+        }else{
+            // create a snackbar to display to user Wrong Answer Message
+        }
+
+
     }
 }
