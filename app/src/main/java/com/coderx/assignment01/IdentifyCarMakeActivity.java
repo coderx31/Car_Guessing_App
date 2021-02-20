@@ -10,8 +10,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,17 +57,17 @@ public class IdentifyCarMakeActivity extends AppCompatActivity {
         Log.d(TAG, "checkAnswer: checking the answer");
         String userAnswer = cars_spinner.getSelectedItem().toString();
         if (carMake.equals(userAnswer)){
-            // create a snackbar to display to user  Correct Answer Message
+            // Generating message with specific color
             String check = ApplicationUtils.multiColorText(getString(R.string.correct),"#3EBF9E");
+            // setting the message to text view
             message.setText(Html.fromHtml(check));
-            Toast.makeText(this, "Correct", Toast.LENGTH_SHORT).show();
 
         }else{
-            // create a snackbar to display to user Wrong Answer Message
+            // Generating message with specific color
             String check = ApplicationUtils.multiColorText(getString(R.string.wrong), "#FF0000");
             String carModel = ApplicationUtils.multiColorText(carMake, "#F6FF00");
+            // setting the message to text view
             message.setText(Html.fromHtml(check+" "+carModel));
-            Toast.makeText(this, "Wrong "+carMake, Toast.LENGTH_SHORT).show();
         }
 
 

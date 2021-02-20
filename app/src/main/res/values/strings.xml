@@ -12,6 +12,7 @@
     <string name="guess_the_car">Guess the Car</string>
     <string name="correct">CORRECT</string>
     <string name="wrong">WRONG</string>
+    <string name="guess_a_letter">Guess a Letter</string>
 
     <string-array name="cars_list">
         <item>Audi</item>

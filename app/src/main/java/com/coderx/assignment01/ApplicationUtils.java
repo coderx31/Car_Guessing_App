@@ -55,7 +55,7 @@ public class ApplicationUtils {
         cars.add(new Image("ford02", "Ford"));
         cars.add(new Image("ford03", "Ford"));
         cars.add(new Image("jaguar01", "Jaguar"));
-        cars.add(new Image("Jaguar02","Jaguar"));
+        cars.add(new Image("jaguar02","Jaguar"));
         cars.add(new Image("lamborghini01", "Lamborghini"));
         cars.add(new Image("lamborghini02", "Lamborghini"));
         cars.add(new Image("mclaren01","McLaren"));
@@ -80,6 +80,10 @@ public class ApplicationUtils {
     public static String multiColorText(String text, String color){
         String combination = "<font color ="+color+">"+text+"</font>";
         return combination;
+    }
+
+    public static void displayAlertBox(){
+
     }
 
 }
