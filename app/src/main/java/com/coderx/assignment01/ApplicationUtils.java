@@ -76,4 +76,10 @@ public class ApplicationUtils {
         return cars; // after adding return the all cars
     }
 
+    // for Color Combination
+    public static String multiColorText(String text, String color){
+        String combination = "<font color ="+color+">"+text+"</font>";
+        return combination;
+    }
+
 }

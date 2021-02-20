@@ -2,24 +2,26 @@ package com.coderx.assignment01;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+
 
 public class IdentifyCarMakeActivity extends AppCompatActivity {
     private static final String TAG = "IdentifyCarMakeActivity";
     private Button btnIdentify;
     private ImageView imgCar;
     private Spinner cars_spinner;
+    private TextView message;
     private List<Image> cars;
     private List<Image> carsList = new ArrayList<>();
     private boolean next; // boolean value for Catch the Identify button clicks
@@ -48,6 +50,7 @@ public class IdentifyCarMakeActivity extends AppCompatActivity {
         btnIdentify = findViewById(R.id.btnIdentify);
         imgCar = findViewById(R.id.imgCar);
         cars_spinner = findViewById(R.id.cars_spinner);
+        message = findViewById(R.id.txt_message);
     }
 
 
@@ -57,10 +60,15 @@ public class IdentifyCarMakeActivity extends AppCompatActivity {
         String userAnswer = cars_spinner.getSelectedItem().toString();
         if (carMake.equals(userAnswer)){
             // create a snackbar to display to user  Correct Answer Message
+            String check = ApplicationUtils.multiColorText(getString(R.string.correct),"#3EBF9E");
+            message.setText(Html.fromHtml(check));
             Toast.makeText(this, "Correct", Toast.LENGTH_SHORT).show();
 
         }else{
             // create a snackbar to display to user Wrong Answer Message
+            String check = ApplicationUtils.multiColorText(getString(R.string.wrong), "#FF0000");
+            String carModel = ApplicationUtils.multiColorText(carMake, "#F6FF00");
+            message.setText(Html.fromHtml(check+" "+carModel));
             Toast.makeText(this, "Wrong "+carMake, Toast.LENGTH_SHORT).show();
         }
 
@@ -86,6 +94,7 @@ public class IdentifyCarMakeActivity extends AppCompatActivity {
                 }
                 else if(next){
                     btnIdentify.setText(R.string.identify);
+                    message.setText("");
                     identifyCar();
                     next = false;
                 }
