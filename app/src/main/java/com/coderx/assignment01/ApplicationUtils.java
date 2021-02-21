@@ -82,8 +82,6 @@ public class ApplicationUtils {
         return combination;
     }
 
-    public static void displayAlertBox(){
 
-    }
 
 }

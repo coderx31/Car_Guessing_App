@@ -3,6 +3,7 @@ package com.coderx.assignment01;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,9 +21,9 @@ public class HintActivity extends AppCompatActivity {
     private ImageView imgCar;
     private EditText guess_input;
     private TextView txtClue;
+    private TextView txtMessage;
     private List<Image> cars;
     private List<Image> carsList = new ArrayList<>();
-    private boolean next;
     private String clue;
     private int letterCount = 0;
     private int wrongGuess = 0;
@@ -45,7 +46,8 @@ public class HintActivity extends AppCompatActivity {
         btnSubmit = findViewById(R.id.btnSubmit);
         imgCar = findViewById(R.id.imgCar);
         guess_input = findViewById(R.id.guess_input);
-        txtClue  =findViewById(R.id.txtClue);
+        txtClue  = findViewById(R.id.txtClue);
+        txtMessage = findViewById(R.id.txtMessage);
     }
 
     private void submitLetter(){
@@ -57,7 +59,7 @@ public class HintActivity extends AppCompatActivity {
         imgCar.setImageDrawable(getResources().getDrawable(
                 ApplicationUtils.getResourceId(car.getImgName(),"mipmap",getApplicationContext())
         ));
-        // setting the clue
+        // setting the clue for each generated image
         clue = "";
         for (int i=0; i<car.getCarMake().length(); i++){
             clue += "-";
@@ -68,6 +70,7 @@ public class HintActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String input = guess_input.getText().toString();
+                // for validation the input - if empty Toast message will popup
                 if (input.equals("")){
                     Toast.makeText(HintActivity.this, "Please enter a Letter", Toast.LENGTH_SHORT).show();
                 }else {
@@ -82,49 +85,63 @@ public class HintActivity extends AppCompatActivity {
         Log.d(TAG, "updateClue: started");
         String input = guess_input.getText().toString().toUpperCase(); // get the user input
         char letter = input.charAt(0);
-        //int wrongGuess = 0;
 
         boolean check = false;
-        //int letterCount = 0;
-       // while (letterCount != carMake.length()) {
             for (int i = 0; i < carMake.length(); i++) {
                 if (carMake.charAt(i) == letter) {
                     clue = clue.substring(0, i) + letter + clue.substring(i + 1);// modified string
-                    //txtClue.setText(clue); // update the clue
+                    check = true;
                     letterCount++;
-                } else {
-                    wrongGuess++;
                 }
             }
-            txtClue.setText(clue); // update the clue
-       // }
+            txtClue.setText(clue); // updating the clue
+        if (!check){
+            // if the input wasn't match, then wrongGuess increased by 1
+            wrongGuess++;
+        }
 
+
+        // if the guess correct
         if (letterCount == carMake.length()){
-            Toast.makeText(this, "CORRECT", Toast.LENGTH_SHORT).show();
-            btnSubmit.setText(R.string.next);
-            //submitLetter();
+            wrongGuess = 0; // setting the wrong guesses to 0
+            letterCount = 0; // setting the letterCount to 0
+            // setting message with custom colors
+            String answer = ApplicationUtils.multiColorText("CORRECT!","#3EBF9E");
+            // display the message
+            txtMessage.setText(Html.fromHtml(answer));
+            btnSubmit.setText(R.string.next);  // change the button Label to Next
+            // when user click on Next button submitLetter method will arise
             btnSubmit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    submitLetter();
-                }
-            });
-        }else{
-            // just to test
-            System.out.println(letterCount);
-        }
-
-        if (wrongGuess == 3){
-            Toast.makeText(this, "WRONG", Toast.LENGTH_SHORT).show();
-            btnSubmit.setText(R.string.next);
-            //submitLetter();
-            btnSubmit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+                    // after clicking on Next, label change to submit
+                    txtMessage.setText("");
+                    btnSubmit.setText(R.string.submit);
                     submitLetter();
                 }
             });
         }
 
+        // if the user guess wrong
+        if (wrongGuess >= 3){
+            wrongGuess = 0; // wrongGuess to 0
+            letterCount = 0; // letterCount to 0
+            // setting Message with custom colors
+            String answer = ApplicationUtils.multiColorText("WRONG!","#FF0000");
+            String carModel = ApplicationUtils.multiColorText(carMake, "#F6FF00");
+            // display the message
+            txtMessage.setText(Html.fromHtml(answer+" "+carModel));
+            btnSubmit.setText(R.string.next); // change the label to Next
+            // when user click on Next button submitLetter method will arise
+            btnSubmit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // after clicking on Next, label change to submit
+                    btnSubmit.setText(R.string.submit);
+                    txtMessage.setText("");
+                    submitLetter();
+                }
+            });
+        }
     }
 }
