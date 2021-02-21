@@ -82,6 +82,26 @@ public class ApplicationUtils {
         return combination;
     }
 
+    // Generate 3 Random Images
+    public static Image[] advancedRandomImageGenerator(ArrayList<Image> cars){
+        Log.d(TAG, "advancedRandomImageGenerator: method started");
+        // generating random numbers
+        Random random = new Random();
+        int img1 = random.nextInt(10); // generate between 0 - 10, 10 excluded
+        int img2 = random.nextInt(20-10)+10; // generate between 10 - 20, 20 excluded
+        int img3 = random.nextInt(30-20)+20;  // generate between 20 - 30, 30 excluded
+
+        // create the image array
+        Image[] images = new Image[3];
+        // adding generated images to images array
+       images[0] = cars.get(img1);
+       images[1] = cars.get(img2);
+       images[2] = cars.get(img3);
+
+       // return the array
+        return images;
+    }
+
 
 
 }
