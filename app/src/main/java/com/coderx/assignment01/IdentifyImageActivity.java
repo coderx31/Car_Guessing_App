@@ -55,9 +55,10 @@ public class IdentifyImageActivity extends AppCompatActivity {
     private void imageSelection(){
         Log.d(TAG, "imageSelection: method started");
         isClicked = false; // set the isClicked false
+
         // clearing the previous message
         txtMessage.setText("");
-        Image[] images = new Image[3]; // initializing an array for get random images
+        Image[] images;// initializing an array for get random images
         images = ApplicationUtils.advancedRandomImageGenerator((ArrayList<Image>) cars); // set the random images to images array
 
         // generating a random number 0-3 for select a carMake

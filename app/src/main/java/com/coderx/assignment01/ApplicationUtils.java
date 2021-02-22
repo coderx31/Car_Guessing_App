@@ -62,7 +62,7 @@ public class ApplicationUtils {
         cars.add(new Image("mercedes01", "Mercedes"));
         cars.add(new Image("mercedes02", "Mercedes"));
         cars.add(new Image("mercedes03", "Mercedes"));
-        cars.add(new Image("minicooper01", "Mini Cooper"));
+        cars.add(new Image("minicooper01", "MiniCooper"));
         cars.add(new Image("mitsubishi01", "Mitsubishi"));
         cars.add(new Image("nissan01", "Nissan"));
         cars.add(new Image("nissan02", "Nissan"));
