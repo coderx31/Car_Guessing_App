@@ -3,6 +3,8 @@ package com.coderx.assignment01;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
@@ -19,14 +21,16 @@ public class IdentifyCarMakeActivity extends AppCompatActivity {
     private Button btnIdentify;
     private ImageView imgCar;
     private Spinner cars_spinner;
-    private TextView message;
+    private TextView message, txtTimer;
     private List<Image> cars;
     private List<Image> carsList = new ArrayList<>();
     private boolean next; // boolean value for Catch the Identify button clicks
+    private int count = 20;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_car_make);
 
@@ -34,11 +38,15 @@ public class IdentifyCarMakeActivity extends AppCompatActivity {
         cars = new ArrayList<>();
         cars = ApplicationUtils.settingImages(carsList); // set all Images into the arrayList with their make
 
+        /*setting up the timer*/
+        timer();
+
         /*Initializing all the views in activity*/
         initViews();
 
         /*calling the identify method for generate a random image*/
         identifyCar();
+
     }
 
     /*all views are initialized in here*/
@@ -49,6 +57,7 @@ public class IdentifyCarMakeActivity extends AppCompatActivity {
         imgCar = findViewById(R.id.imgCar);
         cars_spinner = findViewById(R.id.cars_spinner);
         message = findViewById(R.id.txt_message);
+        txtTimer = findViewById(R.id.txtTimer);
     }
 
 
@@ -89,14 +98,65 @@ public class IdentifyCarMakeActivity extends AppCompatActivity {
                     checkAnswer(car.getCarMake());
                     next = true;
                     btnIdentify.setText(R.string.next);
+                    txtTimer.setText("");
                 }
                 else if(next){
                     btnIdentify.setText(R.string.identify);
                     message.setText("");
                     identifyCar();
                     next = false;
+                    txtTimer.setText("");
                 }
             }
         });
     }
+
+
+    private void timer(){
+        Log.d(TAG, "Timer: Started");
+        // get the boolean value, bundle with intent
+        Bundle bundle = getIntent().getExtras();
+        boolean isChecked = false;
+        if (bundle != null) {
+            isChecked = bundle.getBoolean("isChecked");
+        }
+        // setting up the countdown timer
+        if (isChecked){
+            new CountDownTimer(21000,1000){
+
+                @Override
+                public void onTick(long l) {
+                    // if count less than 10, then change the color of text and add a 0
+                    if (count < 10){
+                        String counter = "0"+count;
+                        txtTimer.setText(Html.fromHtml(ApplicationUtils.multiColorText(counter,"#FF0000")));
+                    }else{
+                        txtTimer.setText(String.valueOf(count));
+                    }
+                    count--;
+                }
+
+                @Override
+                public void onFinish() {
+                    count = 20; // after the finishing timer, count will set to 20
+
+                }
+            }.start(); // starting the timer
+
+          // after the timer finished button will click automatically
+           setAutoClick();
+        }
+    }
+
+    // handler for autoClick
+    private void setAutoClick(){
+        Log.d(TAG, "setAutoClick: btnIdentify clicked");
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                btnIdentify.performClick();
+            }
+        },20000);
+    }
+
 }

@@ -13,6 +13,9 @@
     <string name="correct">CORRECT</string>
     <string name="wrong">WRONG</string>
     <string name="guess_a_letter">Guess a Letter</string>
+    <string name="off">Off</string>
+    <string name="on">On</string>
+    <string name="timer">Timer</string>
 
     <string-array name="cars_list">
         <item>Audi</item>

@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
@@ -20,13 +22,14 @@ public class AdvancedActivity extends AppCompatActivity {
     private static final String TAG = "AdvancedActivity";
     private ImageView imgCar1, imgCar2, imgCar3;
     private EditText car1_input, car2_input, car3_input;
-    private TextView txtScore, txtAnswer1, txtAnswer2, txtAnswer3, txtMessage;
+    private TextView txtScore, txtAnswer1, txtAnswer2, txtAnswer3, txtMessage, txtTimer;
     private Button btnSubmit;
     private List<Image> cars;
     private List<Image> carsList = new ArrayList<>();
     private boolean check1, check2, check3;
     private int wrongGuess = 0;
     private int score = 0;
+    private int count = 20;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,8 @@ public class AdvancedActivity extends AppCompatActivity {
         cars = new ArrayList<>();
         cars = ApplicationUtils.settingImages(carsList);
 
+        /* calling the timer */
+        timer();
         /*calling the initViews method*/
         initViews();
 
@@ -60,6 +65,7 @@ public class AdvancedActivity extends AppCompatActivity {
         txtAnswer3 = findViewById(R.id.txtAnswer3);
         txtMessage = findViewById(R.id.txtMessage);
         btnSubmit = findViewById(R.id.btnSubmit);
+        txtTimer = findViewById(R.id.txtTimer);
     }
 
 
@@ -218,4 +224,52 @@ public class AdvancedActivity extends AppCompatActivity {
 
 
     }
+
+    private void timer(){
+        Log.d(TAG, "Timer: Started");
+        // get the boolean value, bundle with intent
+        Bundle bundle = getIntent().getExtras();
+        boolean isChecked = false;
+        if (bundle != null) {
+            isChecked = bundle.getBoolean("isChecked");
+        }
+        // setting up the countdown timer
+        if (isChecked){
+            new CountDownTimer(21000,1000){
+
+                @Override
+                public void onTick(long l) {
+                    // if count less than 10, then change the color of text and add a 0
+                    if (count < 10){
+                        String counter = "0"+count;
+                        txtTimer.setText(Html.fromHtml(ApplicationUtils.multiColorText(counter,"#FF0000")));
+                    }else{
+                        txtTimer.setText(String.valueOf(count));
+                    }
+                    count--;
+                }
+
+                @Override
+                public void onFinish() {
+                    count = 20; // after the finishing timer, count will set to 20
+
+                }
+            }.start(); // starting the timer
+
+            // after the timer finished button will click automatically
+            setAutoClick();
+        }
+    }
+
+    // handler for autoClick
+    private void setAutoClick(){
+        Log.d(TAG, "setAutoClick: btnIdentify clicked");
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                btnSubmit.performClick();
+            }
+        },21000);
+    }
+
 }

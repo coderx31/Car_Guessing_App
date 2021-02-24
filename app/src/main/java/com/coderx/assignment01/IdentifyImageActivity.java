@@ -3,6 +3,8 @@ package com.coderx.assignment01;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
@@ -19,10 +21,13 @@ public class IdentifyImageActivity extends AppCompatActivity {
     private static final String TAG = "IdentifyImageActivity";
     private ImageView  imgCar1, imgCar2, imgCar3;
     private Button btnNext;
-    private TextView txtName, txtMessage;
+    private TextView txtName, txtMessage, txtTimer;
     private List<Image> cars;
     private List<Image> carsList = new ArrayList<>();
-    private boolean isClicked;
+    private boolean isClicked = false;
+    private int count = 20;
+    private boolean isCorrect = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +37,9 @@ public class IdentifyImageActivity extends AppCompatActivity {
         // initialing the cars arrayList add data
         cars = new ArrayList<>();
         cars = ApplicationUtils.settingImages(carsList);
+
+        /*setting up the timer*/
+        timer();
 
         /*calling the initViews method*/
         initViews();
@@ -49,12 +57,14 @@ public class IdentifyImageActivity extends AppCompatActivity {
         btnNext = findViewById(R.id.btnNext);
         txtName = findViewById(R.id.txtName);
         txtMessage = findViewById(R.id.txtMessage);
+        txtTimer = findViewById(R.id.txtTimer);
     }
 
 
     private void imageSelection(){
         Log.d(TAG, "imageSelection: method started");
-        isClicked = false; // set the isClicked false
+       //isClicked = false; // set the isClicked false
+
 
         // clearing the previous message
         txtMessage.setText("");
@@ -91,6 +101,7 @@ public class IdentifyImageActivity extends AppCompatActivity {
                     String message = ApplicationUtils.multiColorText("CORRECT!","#3EBF9E");
                     txtMessage.setText(Html.fromHtml(message));
                     isClicked = true; // if button clicked then is isClicked to true, therefore if user clicked again message won't change
+                    isCorrect = true; // otherwise when timer is stop application needs to display message
                 }else if(!isClicked){
                     String message = ApplicationUtils.multiColorText("WRONG!","#FF0000");
                     txtMessage.setText(Html.fromHtml(message));
@@ -107,6 +118,7 @@ public class IdentifyImageActivity extends AppCompatActivity {
                     String message = ApplicationUtils.multiColorText("CORRECT!","#3EBF9E");
                     txtMessage.setText(Html.fromHtml(message));
                     isClicked = true;
+                    isCorrect = true;
                 }else if (!isClicked){
                     String message = ApplicationUtils.multiColorText("WRONG!","#FF0000");
                     txtMessage.setText(Html.fromHtml(message));
@@ -122,6 +134,7 @@ public class IdentifyImageActivity extends AppCompatActivity {
                     String message = ApplicationUtils.multiColorText("CORRECT!","#3EBF9E");
                     txtMessage.setText(Html.fromHtml(message));
                     isClicked = true;
+                    isCorrect = true;
                 }else if (!isClicked){
                     String message = ApplicationUtils.multiColorText("WRONG!","#FF0000");
                     txtMessage.setText(Html.fromHtml(message));
@@ -142,13 +155,82 @@ public class IdentifyImageActivity extends AppCompatActivity {
                 if (!isClicked){
                     Toast.makeText(IdentifyImageActivity.this, "Please Select Image", Toast.LENGTH_SHORT).show();
                 }else{
+                  txtTimer.setText("");
+                 txtMessage.setText("");
+                 isClicked = false; // to select again after the click next button
                     imageSelection();
+
                 }
 
             }
         });
 
     }
+
+
+    private void timer(){
+        Log.d(TAG, "Timer: Started");
+        // get the boolean value, bundle with intent
+        Bundle bundle = getIntent().getExtras();
+        boolean isChecked = false;
+        if (bundle != null) {
+            isChecked = bundle.getBoolean("isChecked");
+        }
+        // setting up the countdown timer
+        if (isChecked){
+            new CountDownTimer(21000,1000){
+
+                @Override
+                public void onTick(long l) {
+                    // if count less than 10, then change the color of text and add a 0
+                    if (count < 10){
+                        String counter = "0"+count;
+                        txtTimer.setText(Html.fromHtml(ApplicationUtils.multiColorText(counter,"#FF0000")));
+                    }else{
+                        txtTimer.setText(String.valueOf(count));
+                    }
+                    count--;
+                }
+
+                @Override
+                public void onFinish() {
+                    count = 20; // after the finishing timer, count will set to 20
+                    isClicked = true;
+                    displayMessage();
+
+                }
+            }.start(); // starting the timer
+
+            // after the timer finished button will click automatically
+            setAutoClick();
+        }
+    }
+
+    // handler for autoClick
+    private void setAutoClick(){
+        Log.d(TAG, "setAutoClick: next button clicked");
+        //isClicked = true;
+        Log.d(TAG, "setAutoClick: btnIdentify clicked");
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                btnNext.performClick();
+            }
+        },22000);
+    }
+
+
+    // after timer finish, if user did not select any image
+    private void displayMessage(){
+        Log.d(TAG, "displayMessage: wrong Message displayed");
+        if (!isCorrect) {
+            isClicked = true;
+            String message = ApplicationUtils.multiColorText("WRONG!", "#FF0000");
+            txtMessage.setText(Html.fromHtml(message));
+        }
+
+    }
+
 
 
 }

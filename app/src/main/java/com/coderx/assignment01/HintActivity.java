@@ -3,6 +3,8 @@ package com.coderx.assignment01;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
@@ -21,18 +23,24 @@ public class HintActivity extends AppCompatActivity {
     private ImageView imgCar;
     private EditText guess_input;
     private TextView txtClue;
-    private TextView txtMessage;
+    private TextView txtMessage, txtTimer;
     private List<Image> cars;
     private List<Image> carsList = new ArrayList<>();
     private String clue;
     private int letterCount = 0;
     private int wrongGuess = 0;
+    private int count = 20;
+    private Image car;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hint);
         cars = new ArrayList<>();
         cars = ApplicationUtils.settingImages(carsList); // set all Images into the arrayList with their make
+
+        // calling the Timer
+        timer();
+
         // calling the initializing method
         initViews();
 
@@ -48,13 +56,14 @@ public class HintActivity extends AppCompatActivity {
         guess_input = findViewById(R.id.guess_input);
         txtClue  = findViewById(R.id.txtClue);
         txtMessage = findViewById(R.id.txtMessage);
+        txtTimer = findViewById(R.id.txtTimer);
     }
 
     private void submitLetter(){
         Log.d(TAG, "submitLetter: method started");
 
         // getting the generated image to
-        final Image car = ApplicationUtils.randomImageGenerator((ArrayList<Image>) cars);
+        car = ApplicationUtils.randomImageGenerator((ArrayList<Image>) cars);
         // setting the generated image to image view
         imgCar.setImageDrawable(getResources().getDrawable(
                 ApplicationUtils.getResourceId(car.getImgName(),"mipmap",getApplicationContext())
@@ -71,11 +80,12 @@ public class HintActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String input = guess_input.getText().toString();
                 // for validation the input - if empty Toast message will popup
-                if (input.equals("")){
-                    Toast.makeText(HintActivity.this, "Please enter a Letter", Toast.LENGTH_SHORT).show();
-                }else {
-                    updateClue(car.getCarMake().toUpperCase());
-                }
+                if (input.equals("") && letterCount == 0){
+                  Toast.makeText(HintActivity.this, "Please enter a Letter", Toast.LENGTH_SHORT).show();
+               }else {
+                  updateClue(car.getCarMake().toUpperCase());
+              }
+                //updateClue(car.getCarMake().toUpperCase());
             }
         });
     }
@@ -143,5 +153,82 @@ public class HintActivity extends AppCompatActivity {
                 }
             });
         }
+
+    }
+
+
+    private void timer(){
+        Log.d(TAG, "Timer: Started");
+        // get the boolean value, bundle with intent
+        Bundle bundle = getIntent().getExtras();
+        boolean isChecked = false;
+        if (bundle != null) {
+            isChecked = bundle.getBoolean("isChecked");
+        }
+        // setting up the countdown timer
+        if (isChecked){
+            new CountDownTimer(21000,1000){
+
+                @Override
+                public void onTick(long l) {
+                    // if count less than 10, then change the color of text and add a 0
+                    if (count < 10){
+                        String counter = "0"+count;
+                        txtTimer.setText(Html.fromHtml(ApplicationUtils.multiColorText(counter,"#FF0000")));
+                    }else{
+                        txtTimer.setText(String.valueOf(count));
+                    }
+                    count--;
+                }
+
+                @Override
+                public void onFinish() {
+                    count = 20; // after the finishing timer, count will set to 20
+                   // if user did not suppose to give correct answer, then wrong
+                    timerEnd();
+
+
+                }
+            }.start(); // starting the timer
+
+            // after the timer finished button will click automatically
+            setAutoClick();
+        }
+    }
+
+    private void setAutoClick(){
+        Log.d(TAG, "setAutoClick: btnIdentify clicked");
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                btnSubmit.performClick();
+            }
+        },20000);
+    }
+
+
+    private void timerEnd(){
+        Log.d(TAG, "timerEnd: checks where user input correct or not");
+        if (letterCount != car.getCarMake().length()){
+            letterCount = 0;
+            wrongGuess = 0;
+            String answer = ApplicationUtils.multiColorText("WRONG!","#FF0000");
+            String carModel = ApplicationUtils.multiColorText(car.getCarMake(), "#F6FF00");
+            // display the message
+            txtMessage.setText(Html.fromHtml(answer+" "+carModel));
+            btnSubmit.setText(R.string.next); // change the label to Next
+            txtTimer.setText("");
+            // when user click on Next button submitLetter method will arise
+            btnSubmit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // after clicking on Next, label change to submit
+                    btnSubmit.setText(R.string.submit);
+                    txtMessage.setText("");
+                    submitLetter();
+                }
+            });
+        }
+
     }
 }
