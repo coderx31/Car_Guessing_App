@@ -28,8 +28,9 @@ public class AdvancedActivity extends AppCompatActivity {
     private List<Image> carsList = new ArrayList<>();
     private boolean check1, check2, check3;
     private int wrongGuess = 0;
-    private int score = 0;
     private int count = 20;
+    private boolean isChecked;
+    private Image[] images;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +72,7 @@ public class AdvancedActivity extends AppCompatActivity {
 
     private void submitAnswer(){
         Log.d(TAG, "submitAnswer: method started");
-        final Image[] images = ApplicationUtils.advancedRandomImageGenerator((ArrayList<Image>) cars);
+        images = ApplicationUtils.advancedRandomImageGenerator((ArrayList<Image>) cars);
 
 
         // setting the images to views
@@ -97,15 +98,17 @@ public class AdvancedActivity extends AppCompatActivity {
                 String car2 = car2_input.getText().toString().toLowerCase();
                 String car3 = car3_input.getText().toString().toLowerCase();
 
-                if (car1.equals("") || car2.equals("") || car3.equals("")){
-                    Toast.makeText(AdvancedActivity.this, "Please Fill the blanks", Toast.LENGTH_SHORT).show();
+                if (car1.equals("") && car2.equals("") && car3.equals("")){
+                    if (!isChecked){
+                        //Toast message will display to user, if and only if input fields are empty, and timer is offed
+                        Toast.makeText(AdvancedActivity.this, "Please Fill the blanks", Toast.LENGTH_SHORT).show();
+                    }
                 }else{
 
                     if (car1.equals(images[0].getCarMake().toLowerCase())){
-                        car1_input.setEnabled(false);
+                        car1_input.setEnabled(false); // disabling the input field
                         car1_input.setTextColor(Color.GREEN);
                         check1 = true;
-                        score++;
 
                     }else{
                         car1_input.setTextColor(Color.RED);
@@ -115,7 +118,7 @@ public class AdvancedActivity extends AppCompatActivity {
                         car2_input.setEnabled(false);
                         car2_input.setTextColor(Color.GREEN);
                         check2 = true;
-                        score++;
+
                     }else{
                         car2_input.setTextColor(Color.RED);
                     }
@@ -125,52 +128,26 @@ public class AdvancedActivity extends AppCompatActivity {
                         car3_input.setEnabled(false);
                         car3_input.setTextColor(Color.GREEN);
                         check3  = true;
-                        score++;
+
                     }else{
                         car3_input.setTextColor(Color.RED);
                     }
                 }
 
                 if (check1 && check2 && check3){
-                    wrongGuess = 0; // set the wrongGuess to 0
-                    String message = ApplicationUtils.multiColorText("CORRECT!","#3EBF9E"); // generating the colored Text
-                    txtMessage.setText(Html.fromHtml(message)); // setting to message
-                    btnSubmit.setText(R.string.next);
-                    txtScore.setText(String.valueOf(score));
-                    btnSubmit.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            clearingFields();
-                            submitAnswer();
-                            score = 0;
-                        }
-                    });
+                    checkAnswers("CORRECT!","#3EBF9E");
                 }
                 else{
                     wrongGuess++;
-                }
+                    if (wrongGuess < 3){
+                        timer();
+                    }
 
+                }
 
                 if (wrongGuess >= 3){
-                    wrongGuess = 0;
-                    String message = ApplicationUtils.multiColorText("WRONG!","#FF0000");
-                    txtMessage.setText(Html.fromHtml(message));
-                    // setting the correct answer
-                    settingCorrectAnswer(images);
-                    btnSubmit.setText(R.string.next);
-                    txtScore.setText(String.valueOf(score));
-                    btnSubmit.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                           clearingFields();
-                            submitAnswer();
-                            score = 0;
-                        }
-                    });
+                    checkAnswers("WRONG!","#FF0000");
                 }
-
-
-
             }
         });
 
@@ -229,7 +206,7 @@ public class AdvancedActivity extends AppCompatActivity {
         Log.d(TAG, "Timer: Started");
         // get the boolean value, bundle with intent
         Bundle bundle = getIntent().getExtras();
-        boolean isChecked = false;
+        isChecked = false;
         if (bundle != null) {
             isChecked = bundle.getBoolean("isChecked");
         }
@@ -269,7 +246,46 @@ public class AdvancedActivity extends AppCompatActivity {
             public void run() {
                 btnSubmit.performClick();
             }
-        },21000);
+        },22000);
+    }
+
+
+    private int updateScore(boolean isCheck1, boolean isCheck2, boolean isCheck3){
+        Log.d(TAG, "updateScore: started");
+        // if the user's answer is correct, then score will update by one
+        int score = 0;
+        if (isCheck1){
+            score++;
+        }
+        if (isCheck2){
+            score++;
+        }
+        if (isCheck3){
+            score++;
+        }
+
+        return score;
+    }
+
+
+    private void checkAnswers(String messageText, String color){
+        Log.d(TAG, "checkAnswers: started");
+        wrongGuess = 0; // setting the wrongGuess to 0
+        String message = ApplicationUtils.multiColorText(messageText,color); // changing the color of text
+        txtMessage.setText(Html.fromHtml(message)); // update the message
+        // setting the correct answer
+        settingCorrectAnswer(images);
+        btnSubmit.setText(R.string.next);
+        txtScore.setText(String.valueOf(updateScore(check1,check2,check3)));
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clearingFields();
+                submitAnswer();
+                btnSubmit.setText(R.string.submit);
+                txtScore.setText("");
+            }
+        });
     }
 
 }
