@@ -98,7 +98,7 @@ public class IdentifyImageActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (finalImages[0].getCarMake().equals(carMake) && !isClicked){
-                    String message = ApplicationUtils.multiColorText("CORRECT!","#3EBF9E");
+                    String message = ApplicationUtils.multiColorText("CORRECT!","#00FF00");
                     txtMessage.setText(Html.fromHtml(message));
                     isClicked = true; // if button clicked then is isClicked to true, therefore if user clicked again message won't change
                     isCorrect = true; // otherwise when timer is stop application needs to display message
@@ -115,7 +115,7 @@ public class IdentifyImageActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (finalImages[1].getCarMake().equals(carMake) && !isClicked){
-                    String message = ApplicationUtils.multiColorText("CORRECT!","#3EBF9E");
+                    String message = ApplicationUtils.multiColorText("CORRECT!","#00FF00");
                     txtMessage.setText(Html.fromHtml(message));
                     isClicked = true;
                     isCorrect = true;
@@ -131,7 +131,7 @@ public class IdentifyImageActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (finalImages[2].getCarMake().equals(carMake) && !isClicked){
-                    String message = ApplicationUtils.multiColorText("CORRECT!","#3EBF9E");
+                    String message = ApplicationUtils.multiColorText("CORRECT!","#00FF00");
                     txtMessage.setText(Html.fromHtml(message));
                     isClicked = true;
                     isCorrect = true;

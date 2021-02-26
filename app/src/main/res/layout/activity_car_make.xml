@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".IdentifyCarMakeActivity"
+    android:background="@drawable/portrait"
     >
 
     <ImageView
@@ -15,7 +16,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@tools:sample/avatars"
+        tools:ignore="ContentDescription" />
 
     <Button
         android:id="@+id/btnIdentify"
@@ -35,12 +37,12 @@
     <Spinner
         android:id="@+id/cars_spinner"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="108dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="112dp"
+        android:background="@color/white"
         android:entries="@array/cars_list"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.578"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgCar" />
 
@@ -49,7 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
-        android:textStyle="bold"
+        android:textStyle="bold|italic"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/btnIdentify"
         app:layout_constraintEnd_toEndOf="parent"
@@ -64,8 +66,8 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/source_code_pro_bold"
-        android:text="10"
         android:textSize="36sp"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

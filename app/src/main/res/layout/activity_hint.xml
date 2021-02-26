@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HintActivity">
+    tools:context=".HintActivity"
+    android:background="@drawable/portrait">
 
     <ImageView
         android:id="@+id/imgCar"
@@ -14,12 +15,13 @@
         android:src="@drawable/ic_launcher_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
     <EditText
         android:id="@+id/guess_input"
         android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:layout_marginTop="24dp"
         android:ems="10"
         android:fontFamily="@font/roboto"
@@ -27,10 +29,11 @@
         android:inputType="textPersonName"
         android:maxLength="1"
         android:textAlignment="center"
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtClue"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="Autofill,MissingConstraints" />
 
     <Button
         android:id="@+id/btnSubmit"
@@ -53,6 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text=""
+        android:textColor="@color/white"
         android:lineSpacingExtra="5dp"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -80,8 +84,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/source_code_pro_bold"
-        android:text="10"
         android:textSize="36sp"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

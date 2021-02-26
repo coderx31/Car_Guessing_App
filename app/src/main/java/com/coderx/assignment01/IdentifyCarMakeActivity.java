@@ -67,14 +67,14 @@ public class IdentifyCarMakeActivity extends AppCompatActivity {
         String userAnswer = cars_spinner.getSelectedItem().toString();
         if (carMake.equals(userAnswer)){
             // Generating message with specific color
-            String check = ApplicationUtils.multiColorText(getString(R.string.correct),"#3EBF9E");
+            String check = ApplicationUtils.multiColorText(getString(R.string.correct),"#00FF00");
             // setting the message to text view
             message.setText(Html.fromHtml(check));
 
         }else{
             // Generating message with specific color
             String check = ApplicationUtils.multiColorText(getString(R.string.wrong), "#FF0000");
-            String carModel = ApplicationUtils.multiColorText(carMake, "#F6FF00");
+            String carModel = ApplicationUtils.multiColorText(carMake, "#ffff00");
             // setting the message to text view
             message.setText(Html.fromHtml(check+" "+carModel));
         }

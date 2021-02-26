@@ -81,7 +81,7 @@ public class HintActivity extends AppCompatActivity {
                 String input = guess_input.getText().toString();
                 // for validation the input - if empty Toast message will popup
                 if (input.equals("") && letterCount == 0){
-                  Toast.makeText(HintActivity.this, "Please enter a Letter", Toast.LENGTH_SHORT).show();
+                  Toast.makeText(HintActivity.this, R.string.enter_letter, Toast.LENGTH_SHORT).show();
                }else {
                   updateClue(car.getCarMake().toUpperCase());
               }
@@ -116,7 +116,7 @@ public class HintActivity extends AppCompatActivity {
             wrongGuess = 0; // setting the wrong guesses to 0
             letterCount = 0; // setting the letterCount to 0
             // setting message with custom colors
-            String answer = ApplicationUtils.multiColorText("CORRECT!","#3EBF9E");
+            String answer = ApplicationUtils.multiColorText("CORRECT!","#00FF00");
             // display the message
             txtMessage.setText(Html.fromHtml(answer));
             btnSubmit.setText(R.string.next);  // change the button Label to Next
@@ -138,7 +138,7 @@ public class HintActivity extends AppCompatActivity {
             letterCount = 0; // letterCount to 0
             // setting Message with custom colors
             String answer = ApplicationUtils.multiColorText("WRONG!","#FF0000");
-            String carModel = ApplicationUtils.multiColorText(carMake, "#F6FF00");
+            String carModel = ApplicationUtils.multiColorText(carMake, "#ffff00");
             // display the message
             txtMessage.setText(Html.fromHtml(answer+" "+carModel));
             btnSubmit.setText(R.string.next); // change the label to Next
@@ -213,7 +213,7 @@ public class HintActivity extends AppCompatActivity {
             letterCount = 0;
             wrongGuess = 0;
             String answer = ApplicationUtils.multiColorText("WRONG!","#FF0000");
-            String carModel = ApplicationUtils.multiColorText(car.getCarMake(), "#F6FF00");
+            String carModel = ApplicationUtils.multiColorText(car.getCarMake(), "#ffff00");
             // display the message
             txtMessage.setText(Html.fromHtml(answer+" "+carModel));
             btnSubmit.setText(R.string.next); // change the label to Next

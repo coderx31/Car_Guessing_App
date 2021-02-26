@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".IdentifyImageActivity">
+    tools:context=".IdentifyImageActivity"
+    android:background="@drawable/land">
 
     <ImageView
         android:id="@+id/imgCar1"
@@ -15,7 +16,9 @@
         app:layout_constraintEnd_toStartOf="@+id/imgCar2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription"
+        />
 
     <ImageView
         android:id="@+id/imgCar3"
@@ -26,7 +29,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/imgCar2"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
     <ImageView
         android:id="@+id/imgCar2"
@@ -37,7 +41,8 @@
         app:layout_constraintEnd_toStartOf="@+id/imgCar3"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/imgCar1"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/txtName"
@@ -71,7 +76,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto"
         android:textSize="18sp"
-        android:textStyle="bold"
+        android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -82,8 +87,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/source_code_pro_bold"
-        android:text="10"
+        android:text=""
         android:textSize="36sp"
+        android:textColor="@color/white"
         app:layout_constraintBaseline_toBaselineOf="@+id/btnNext"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnNext" />

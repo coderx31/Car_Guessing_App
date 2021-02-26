@@ -135,7 +135,7 @@ public class AdvancedActivity extends AppCompatActivity {
                 }
 
                 if (check1 && check2 && check3){
-                    checkAnswers("CORRECT!","#3EBF9E");
+                    checkAnswers("CORRECT!","#00FF00");
                 }
                 else{
                     wrongGuess++;
@@ -185,17 +185,17 @@ public class AdvancedActivity extends AppCompatActivity {
         String answer;
         // check if user correct or not, if not set the answer
         if (!cars[0].getCarMake().toLowerCase().equals(car1)){
-            answer = ApplicationUtils.multiColorText(cars[0].getCarMake(),"#F6FF00");
+            answer = ApplicationUtils.multiColorText(cars[0].getCarMake(),"#ffff00");
             txtAnswer1.setText(Html.fromHtml(answer));
         }
 
         if (!cars[1].getCarMake().toLowerCase().equals(car2)){
-            answer = ApplicationUtils.multiColorText(cars[1].getCarMake(),"#F6FF00");
+            answer = ApplicationUtils.multiColorText(cars[1].getCarMake(),"#ffff00");
             txtAnswer2.setText(Html.fromHtml(answer));
         }
 
         if (!cars[2].getCarMake().toLowerCase().equals(car3)){
-            answer = ApplicationUtils.multiColorText(cars[2].getCarMake(),"#F6FF00");
+            answer = ApplicationUtils.multiColorText(cars[2].getCarMake(),"#ffff00");
             txtAnswer3.setText(Html.fromHtml(answer));
         }
 

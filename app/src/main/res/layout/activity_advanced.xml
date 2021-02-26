@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdvancedActivity">
+    tools:context=".AdvancedActivity"
+    android:background="@drawable/portrait">
 
     <ImageView
         android:id="@+id/imgCar1"
@@ -14,21 +15,24 @@
         android:layout_marginTop="16dp"
         android:src="@drawable/ic_launcher_background"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
     <EditText
         android:id="@+id/car1_input"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:fontFamily="@font/roboto"
         android:hint="@string/guess_the_car"
         android:inputType="textPersonName"
         android:textAlignment="center"
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/imgCar1"
         app:layout_constraintStart_toStartOf="@+id/imgCar1"
-        app:layout_constraintTop_toBottomOf="@+id/imgCar1" />
+        app:layout_constraintTop_toBottomOf="@+id/imgCar1"
+        android:importantForAutofill="no" />
 
     <ImageView
         android:id="@+id/imgCar2"
@@ -38,21 +42,24 @@
         android:layout_marginEnd="8dp"
         android:src="@drawable/ic_launcher_background"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
     <EditText
         android:id="@+id/car2_input"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:fontFamily="@font/roboto"
         android:hint="@string/guess_the_car"
         android:inputType="textPersonName"
         android:textAlignment="center"
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/imgCar2"
         app:layout_constraintStart_toStartOf="@+id/imgCar2"
-        app:layout_constraintTop_toBottomOf="@+id/imgCar2" />
+        app:layout_constraintTop_toBottomOf="@+id/imgCar2"
+        tools:ignore="Autofill" />
 
     <ImageView
         android:id="@+id/imgCar3"
@@ -62,21 +69,24 @@
         android:layout_marginTop="140dp"
         android:src="@drawable/ic_launcher_background"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtAnswer1" />
+        app:layout_constraintTop_toBottomOf="@+id/txtAnswer1"
+        tools:ignore="ContentDescription" />
 
     <EditText
         android:id="@+id/car3_input"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:fontFamily="@font/roboto"
         android:hint="@string/guess_the_car"
         android:inputType="textPersonName"
         android:textAlignment="center"
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/imgCar3"
         app:layout_constraintStart_toStartOf="@+id/imgCar3"
-        app:layout_constraintTop_toBottomOf="@+id/imgCar3" />
+        app:layout_constraintTop_toBottomOf="@+id/imgCar3"
+        tools:ignore="Autofill" />
 
     <Button
         android:id="@+id/btnSubmit"
@@ -102,6 +112,7 @@
         android:fontFamily="@font/roboto"
         android:textSize="36sp"
         android:textStyle="bold"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -139,7 +150,7 @@
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/roboto"
         android:textSize="18sp"
-        android:textStyle="bold"
+        android:textStyle="bold|italic"
         app:layout_constraintBottom_toTopOf="@+id/btnSubmit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -151,8 +162,9 @@
         android:layout_marginEnd="48dp"
         android:layout_marginBottom="128dp"
         android:fontFamily="@font/source_code_pro_bold"
-        android:text="10"
+        android:text=""
         android:textSize="36sp"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
