@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AdvancedActivity"
-    android:background="@drawable/portrait">
+    android:background="@drawable/port">
 
     <ImageView
         android:id="@+id/imgCar1"

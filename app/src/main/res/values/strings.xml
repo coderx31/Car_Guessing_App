@@ -17,6 +17,10 @@
     <string name="on">On</string>
     <string name="timer">Timer</string>
     <string name="enter_letter">"Please enter a Letter"</string>
+    <string name="car_make">Identify Car Make</string>
+    <string name="hint">Identify With Hints</string>
+    <string name="car_image">Choose the Correct Answer</string>
+    <string name="advanced">Identify the cars</string>
 
     <string-array name="cars_list">
         <item>Audi</item>
