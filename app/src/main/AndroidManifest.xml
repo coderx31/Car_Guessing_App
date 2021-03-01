@@ -10,12 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".AdvancedActivity"
+            android:configChanges="orientation|screenSize"
             android:label="@string/advanced"/>
         <activity android:name=".IdentifyImageActivity"
+            android:configChanges="orientation|screenSize"
             android:label="@string/car_image"/>
         <activity android:name=".HintActivity"
+            android:configChanges="orientation|screenSize"
             android:label="@string/hint"/>
         <activity android:name=".IdentifyCarMakeActivity"
+            android:configChanges="orientation|screenSize"
             android:label="@string/car_make"/>
         <activity android:name=".MainActivity">
             <intent-filter>
