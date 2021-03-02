@@ -79,6 +79,9 @@ public class ApplicationUtils {
     }
 
     // for Color Combination
+    /* https://stackoverflow.com/questions/6094315/single-textview-with-multiple-colored-text */
+    /* https://abhiandroid.com/ui/html */
+    /* https://developer.android.com/reference/android/text/Html */
     public static String multiColorText(String text, String color){
         String combination = "<font color ="+color+">"+text+"</font>";
         return combination;

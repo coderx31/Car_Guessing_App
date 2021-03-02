@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /* https://stackoverflow.com/questions/14475109/remove-android-app-title-bar */
         Objects.requireNonNull(getSupportActionBar()).hide(); // hide title bar from the page
         setContentView(R.layout.activity_main);
 
@@ -90,6 +91,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // checking the status of switch and update the isChecked
+    /* https://abhiandroid.com/ui/switch */
+    /* https://developer.android.com/reference/android/widget/Switch */
     private void switchState(){
         Log.d(TAG, "switchState: getting the state of switch");
         isChecked = switch1.isChecked();

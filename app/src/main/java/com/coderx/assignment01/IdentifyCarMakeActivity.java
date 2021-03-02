@@ -112,6 +112,8 @@ public class IdentifyCarMakeActivity extends AppCompatActivity {
     }
 
 
+    /* https://developer.android.com/reference/android/os/CountDownTimer */
+
     private void timer(){
         Log.d(TAG, "Timer: Started");
         // get the boolean value, bundle with intent
@@ -148,6 +150,7 @@ public class IdentifyCarMakeActivity extends AppCompatActivity {
         }
     }
 
+    /* https://stackoverflow.com/questions/45836646/how-to-automatically-click-a-button-in-android-once-time */
     // handler for autoClick
     private void setAutoClick(){
         Log.d(TAG, "setAutoClick: btnIdentify clicked");

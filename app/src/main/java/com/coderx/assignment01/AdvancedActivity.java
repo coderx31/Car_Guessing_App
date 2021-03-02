@@ -90,6 +90,8 @@ public class AdvancedActivity extends AppCompatActivity {
         check1 = false;
         check2 = false;
         check3 = false;
+
+        /* https://stackoverflow.com/questions/5879250/how-to-disable-edittext-in-android */
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
