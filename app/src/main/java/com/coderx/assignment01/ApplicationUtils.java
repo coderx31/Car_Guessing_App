@@ -8,8 +8,8 @@ import java.util.Random;
 
 public class ApplicationUtils {
     private static final String TAG = "ApplicationUtils";
-    private static int count = 20;
-    private static String strCount;
+//    private static int count = 20;
+//    private static String strCount;
 
     // Random Image Generating Method
     public static Image randomImageGenerator(ArrayList<Image> cars){
